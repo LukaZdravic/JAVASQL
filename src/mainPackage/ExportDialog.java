@@ -1,14 +1,5 @@
 package mainPackage;
 
-
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,10 +9,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import mainFrame.ApplicationFrame;
-import mainPackage.MainClass;
-public class LoadingDialog extends Stage{
-	public LoadingDialog() {
+
+public class ExportDialog extends Stage{
+	
+	
+	public ExportDialog() {
 		setTitle("Izaberite opciju!");
 		setHeight(200);
 		setWidth(300);
@@ -32,24 +24,27 @@ public class LoadingDialog extends Stage{
 			close();
 			
 		});
-		Label l = new Label("Koji format zelite da ucitate: \n");
+		
+		Label l = new Label("Po kom formatu zelite da sacuvate: \n");
 		
 		Button sqlFormat = new Button("SQL Format!");
 		Button customFormat = new Button("Custom Format!");
 		
 		TextField tf = new TextField();
 		tf.setPromptText("Unesite naziv fajla(punu putanju do fajla)...");
-	
+		
+		
 		sqlFormat.setOnAction((ae)->{
-			MainClass.ucitajSQL(tf.getText());
+			MainClass.exportSQL(tf.getText());
 			//close();
 		});
 		
 		customFormat.setOnAction((ae)->{
-			MainClass.ucitajCustom(tf.getText());
+			MainClass.exportCustom(tf.getText());
 			//C:\Users\lukaz\Desktop
 			//close();
 		});
+		
 		
 		HBox buttonBox = new HBox(10);
 		
@@ -67,7 +62,9 @@ public class LoadingDialog extends Stage{
 		setScene(scena);
 	
 		show();
+		
+		
+		
 	}
-	
 
 }

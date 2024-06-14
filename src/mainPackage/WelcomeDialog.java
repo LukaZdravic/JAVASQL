@@ -1,5 +1,6 @@
 package mainPackage;
 
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,7 +15,7 @@ import mainFrame.ApplicationFrame.*;
 
 public class WelcomeDialog extends Stage{
 		
-	public WelcomeDialog() {
+	public WelcomeDialog(Runnable r) {
 		setTitle("Dobro dosli!");
 		setHeight(200);
 		setWidth(300);
@@ -22,6 +23,9 @@ public class WelcomeDialog extends Stage{
 		initModality(Modality.APPLICATION_MODAL);
 		
 		setOnCloseRequest((ae)->{
+			if(r!=null) {
+				Platform.runLater(r);
+			}
 			close();
 			
 		});
@@ -34,13 +38,16 @@ public class WelcomeDialog extends Stage{
 		kreirajNovu.setOnAction((ae)->{
 			System.out.println("Click kreiraj");
 			ApplicationFrame.dataBase.clear();
+			if(r!=null) {
+				Platform.runLater(r);
+			}
 			close();
 		});
 		
 		ucitajPostojecu.setOnAction((ae)->{
 			System.out.println("Click postojeca");
 			new LoadingDialog();
-			close();
+			//close();
 		});
 		
 		HBox buttonBox = new HBox(10);
